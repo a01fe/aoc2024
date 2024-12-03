@@ -35,5 +35,5 @@ class TestDay3 extends munit.FunSuite:
 
   test("Check evaluate with part2 test data"):
     val p = os.pwd / "day3" / "test2.txt"
-    val is = parsePartTwo(p).toList
+    val is = parsePartTwo(p)
     assert(evaluate(is) == 48)

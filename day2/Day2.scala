@@ -1,5 +1,7 @@
 package aoc2024
 
+import scala.annotation.tailrec
+
 object Day2:
 
   def read(p: os.Path): List[List[Int]] =
@@ -9,6 +11,7 @@ object Day2:
       .toList
 
   def isSafe(ls: List[Int]): Boolean =
+    @tailrec
     def isSafe2(p: List[List[Int]], o: Int => Boolean): Boolean =
       (p: @unchecked) match
         case Nil             => true

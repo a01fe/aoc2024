@@ -1,5 +1,7 @@
 package aoc2024
 
+import scala.annotation.tailrec
+
 sealed trait Instruction
 case class Mul(x: Int, y: Int) extends Instruction:
   def result = x * y
@@ -29,15 +31,18 @@ object Day3:
         case List(null, null, null, "do", _*)          => Do()
         case List(null, null, null, null, "don't", _*) => DoNot()
 
-  def evaluate(is: List[Instruction], enabled: Boolean = true): Int =
-    (is: @unchecked) match
-      case Nil                       => 0
-      case Do() :: t                 => evaluate(t, true)
-      case DoNot() :: t              => evaluate(t, false)
-      case (m: Mul) :: t if enabled  => m.result + evaluate(t, enabled)
-      case (m: Mul) :: t if !enabled => evaluate(t, enabled)
+  def evaluate(is: Iterator[Instruction]): Int =
+    @tailrec
+    def evaluate2(is: List[Instruction], enabled: Boolean, sum: Int): Int =
+      (is: @unchecked) match
+        case Nil                       => sum
+        case Do() :: t                 => evaluate2(t, true, sum)
+        case DoNot() :: t              => evaluate2(t, false, sum)
+        case (m: Mul) :: t if enabled  => evaluate2(t, enabled, sum + m.result)
+        case (m: Mul) :: t if !enabled => evaluate2(t, enabled, sum)
+    evaluate2(is.toList, true, 0)
 
   def run(p: os.Path) =
     println(s"part 1: ${{ partOne(p) }}")
-    val is = parsePartTwo(p).toList
+    val is = parsePartTwo(p)
     println(s"part 2: ${{ evaluate(is) }}")

@@ -10,3 +10,4 @@ object Dispatch:
         day match
           case "day1" => Day1.run(p)
           case "day2" => Day2.run(p)
+          case "day3" => Day3.run(p)

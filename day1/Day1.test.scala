@@ -1,4 +1,4 @@
-package aoc2024
+package aoc2024.day1
 
 class TestDay1 extends munit.FunSuite:
 

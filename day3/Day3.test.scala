@@ -1,6 +1,4 @@
-package aoc2024
-
-import aoc2024.Day3.*
+package aoc2024.day3
 
 class TestDay3 extends munit.FunSuite:
 
@@ -15,11 +13,11 @@ class TestDay3 extends munit.FunSuite:
       Mul(11, 8),
       Mul(8, 5)
     )
-    assert(parsePartOne(p).toList == r)
+    assert(Day3.parsePart1(p).toList == r)
 
   test("Check part 1 results on test data"):
     val p = os.pwd / "day3" / "test.txt"
-    assert(partOne(p) == 161)
+    assert(Day3.part1(p) == 161)
 
   test("Read and parse part2 test data"):
     val p = os.pwd / "day3" / "test2.txt"
@@ -31,9 +29,9 @@ class TestDay3 extends munit.FunSuite:
       Do(),
       Mul(8, 5)
     )
-    assert(parsePartTwo(p).toList == r)
+    assert(Day3.parsePart2(p).toList == r)
 
   test("Check evaluate with part2 test data"):
     val p = os.pwd / "day3" / "test2.txt"
-    val is = parsePartTwo(p)
-    assert(evaluate(is) == 48)
+    val is = Day3.parsePart2(p)
+    assert(Day3.evaluate(is) == 48)

@@ -1,4 +1,4 @@
-package aoc2024
+package aoc2024.day3
 
 import scala.annotation.tailrec
 
@@ -10,17 +10,17 @@ case class DoNot() extends Instruction
 
 object Day3:
 
-  def parsePartOne(p: os.Path): Iterator[Mul] =
+  def parsePart1(p: os.Path): Iterator[Mul] =
     val s = os.read(p)
     val mulPattern = raw"mul\((\d{1,3}),(\d{1,3})\)".r.unanchored
     mulPattern
       .findAllMatchIn(s)
       .map(m => Mul(m.group(1).toInt, m.group(2).toInt))
 
-  def partOne(p: os.Path): Int =
-    parsePartOne(p).map(_.result).sum
+  def part1(p: os.Path): Int =
+    parsePart1(p).map(_.result).sum
 
-  def parsePartTwo(p: os.Path): Iterator[Instruction] =
+  def parsePart2(p: os.Path): Iterator[Instruction] =
     val s = os.read(p)
     val instructionPattern = raw"(?:(mul)\((\d{1,3}),(\d{1,3})\))|(?:(do)\(\))|(?:(don't)\(\))".r.unanchored
     instructionPattern
@@ -43,6 +43,6 @@ object Day3:
     evaluate2(is.toList, true, 0)
 
   def run(p: os.Path) =
-    println(s"part 1: ${{ partOne(p) }}")
-    val is = parsePartTwo(p)
+    println(s"part 1: ${{ part1(p) }}")
+    val is = parsePart2(p)
     println(s"part 2: ${{ evaluate(is) }}")

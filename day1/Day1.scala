@@ -1,4 +1,4 @@
-package aoc2024
+package aoc2024.day1
 
 object Day1:
 
@@ -18,7 +18,7 @@ object Day1:
       .sum
 
   def part2(l: Vector[Int], r: Vector[Int]): Int =
-    val rs = r.groupMapReduce(identity)(a => 1)(_ + _)
+    val rs = r.groupMapReduce(identity)(_ => 1)(_ + _)
     l.map(l => l * rs.getOrElse(l, 0)).sum
 
   def run(p: os.Path) =
